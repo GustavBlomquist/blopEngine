@@ -82,10 +82,6 @@ else()
     FetchContent_MakeAvailable(Lua)
 endif()
 
-
-
 # Link SDL2 and Lua to executable
 target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIRS} ${LUA_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2::SDL2main lua)
-
-
