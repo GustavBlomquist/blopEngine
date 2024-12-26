@@ -138,7 +138,6 @@ else()
     message(STATUS "Lua found on the system.")
 endif()
 
-
 # Link SDL2 and Lua to executable
 target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_INCLUDE_DIR}/.. ${LUA_INCLUDE_DIR})
 target_link_libraries(
