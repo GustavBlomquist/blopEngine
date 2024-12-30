@@ -50,15 +50,15 @@ void Game::Init(){
         return;
     }
 
+    updateDeltaTime = MS_PER_UPDATE / 1000.0;
+    updateTimeAccumulator = 0.0;
+    millisecsPreviousUpdate = SDL_GetTicks64();
+
     isRunning = true;
 }
 
 void Game::Start(){
 
-}
-
-void Game::Update(){
-    
 }
 
 void Game::ProcessInput(){
@@ -81,6 +81,28 @@ void Game::ProcessInput(){
                 break;
         }
     }
+}
+
+void Game::Update(){
+    double updateTime = (SDL_GetTicks64() - millisecsPreviousUpdate) / 1000.0;
+    // Ensure that we don't get an infinite loop if computer cannot catch up
+    if(updateTime > 0.25)
+        updateTime = 0.25;
+
+    // Store updatetime to compare next update.
+    millisecsPreviousUpdate = SDL_GetTicks64();
+
+    updateTimeAccumulator += updateTime;
+
+    // All updates are done within this loop.
+    while(updateTimeAccumulator >= updateDeltaTime){
+        // TODO: Update systems
+
+
+
+        updateTimeAccumulator -= updateDeltaTime;
+    }
+    interpolationVal = updateTimeAccumulator / updateDeltaTime;
 }
 
 void Game::Render(){
